@@ -28,9 +28,13 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 	for _, f := range zr.File {
 		info := f.FileHeader.FileInfo()
 		if !info.IsDir() {
-			fmt.Fprintf(w, "%s\n", filepath.Base(info.Name()))
-			continue
+			// do something different if get a zip file here?
+			basename := filepath.Base(info.Name())
+			name := nameWithoutExt(basename)
+			fmt.Fprintf(w, "%s\n", name)
 		}
+	}
+}
 
 func nameWithoutExt(filename string) string {
 	for i := len(filename) - 1; i >= 0; i-- {
