@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 	_ "os"
-	_ "path/filepath"
+	"path/filepath"
 )
 
 func zipHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +27,11 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, f := range zr.File {
-		fmt.Fprintf(w, "%s\n", f.FileHeader.Name)
+		info := f.FileHeader.FileInfo()
+		if !info.IsDir() {
+			fmt.Fprintf(w, "%s\n", filepath.Base(info.Name()))
+			continue
+		}
 
 		// // zipWalkFunc(f
 		// filepath.Walk(f.FileHeader.Name, func(path string, _ os.FileInfo, _ error) error {
@@ -38,15 +42,4 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 		// })
 
 	}
-	// fmt.Fprintf(w, "foobar\n")
 }
-
-// func zipWalk(f zip.File, walkFn zipWalkFunc) error {
-// 	info, err := f.FileHeader.FileInfo()
-// 	if err != nil {
-// 		return walkFn(root, nil, err)
-// 	}
-// 	return walk(root, info, walkFn)
-// }
-
-// type zipWalkFunc func(f zip.File, info os.FileInfo, err error) error
