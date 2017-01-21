@@ -32,5 +32,11 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
+func nameWithoutExt(filename string) string {
+	for i := len(filename) - 1; i >= 0; i-- {
+		if filename[i] == '.' {
+			return filename[:i]
+		}
 	}
+	return filename // no extension; default to input
 }
