@@ -19,8 +19,6 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	// validate that sent file is zip
-	// for now, assume
-
 	zr, err := zip.NewReader(bytes.NewReader(body), r.ContentLength)
 	if err != nil {
 		log.Fatal(err)
