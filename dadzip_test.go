@@ -2,11 +2,8 @@ package dadzip
 
 import (
 	"bytes"
-	_ "fmt"
 	"io/ioutil"
-	_ "net/http"
 	"net/http/httptest"
-	_ "os"
 	"testing"
 )
 
