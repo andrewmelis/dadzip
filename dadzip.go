@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	_ "os"
 	"path/filepath"
 )
 
