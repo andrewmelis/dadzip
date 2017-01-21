@@ -23,6 +23,7 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer zr.Close()
 
 	for _, f := range zr.File {
 		info := f.FileHeader.FileInfo()
