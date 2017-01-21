@@ -33,13 +33,5 @@ func zipHandler(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
-		// // zipWalkFunc(f
-		// filepath.Walk(f.FileHeader.Name, func(path string, _ os.FileInfo, _ error) error {
-		// 	fmt.Fprintf(w, "%s\n", path)
-		// 	// log.Printf(path)
-		// 	// log.Printf(info.Name())
-		// 	return nil
-		// })
-
 	}
 }
