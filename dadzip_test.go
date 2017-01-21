@@ -18,7 +18,7 @@ func TestSendZipSingleFile(t *testing.T) {
 
 	zipHandler(w, r)
 
-	expected := "foo.txt"
+	expected := "foo.txt\n"
 	actual := w.Body.String()
 
 	if expected != actual {
