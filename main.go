@@ -10,5 +10,6 @@ import (
 func main() {
 	log.Printf("starting server...")
 	http.HandleFunc("/filenames", ziphandler.ZipHandler)
+	http.HandleFunc("/test", ziphandler.MultiPartZipHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
