@@ -19,28 +19,6 @@ var ziptests = []struct {
 	{"testdata/compositewithextensions.zip", "bar\nhello\nreadonly\n"},
 }
 
-func TestZipHandler(t *testing.T) {
-	for _, tt := range ziptests {
-		b, err := ioutil.ReadFile(tt.testfile)
-		if err != nil {
-			t.Errorf("could not open test data")
-		}
-
-		r := bytes.NewReader(b)
-
-		req := httptest.NewRequest("POST", "/filenames", r)
-		w := httptest.NewRecorder()
-
-		ZipHandler(w, req)
-
-		actual := w.Body.String()
-
-		if tt.expected != actual {
-			t.Errorf("expected: %s, actual: %s\n", tt.expected, actual)
-		}
-	}
-}
-
 func TestMultiPartZipHandler(t *testing.T) {
 	for _, tt := range ziptests {
 		b, err := ioutil.ReadFile(tt.testfile)

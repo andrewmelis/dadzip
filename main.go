@@ -12,7 +12,6 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./index.html")
 	})
-	http.HandleFunc("/filenames", ziphandler.ZipHandler)
-	http.HandleFunc("/test", ziphandler.MultiPartZipHandler)
+	http.HandleFunc("/filenames", ziphandler.MultiPartZipHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
