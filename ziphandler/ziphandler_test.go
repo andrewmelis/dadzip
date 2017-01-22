@@ -1,4 +1,4 @@
-package dadzip
+package ziphandler
 
 import (
 	"bytes"
@@ -29,7 +29,7 @@ func TestZipHandler(t *testing.T) {
 		req := httptest.NewRequest("POST", "/filenames", r)
 		w := httptest.NewRecorder()
 
-		zipHandler(w, req)
+		ZipHandler(w, req)
 
 		actual := w.Body.String()
 

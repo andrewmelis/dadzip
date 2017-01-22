@@ -1,4 +1,4 @@
-package dadzip
+package ziphandler
 
 import (
 	"archive/zip"
@@ -10,17 +10,22 @@ import (
 	"path/filepath"
 )
 
-func zipHandler(w http.ResponseWriter, r *http.Request) {
+func ZipHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("received: %+v", r)
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("%s: no body found\n", err)
+		fmt.Fprintf(w, "%s: no body found\n", err)
+		return
 	}
 	defer r.Body.Close()
 
 	// validate that sent file is zip
 	zr, err := zip.NewReader(bytes.NewReader(body), r.ContentLength)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("%s\nreceived: %+v", err, body)
+		fmt.Fprintf(w, "%s\n", err)
+		return
 	}
 
 	for _, f := range zr.File {
