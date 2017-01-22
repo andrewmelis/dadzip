@@ -67,7 +67,7 @@ func MultiPartZipHandler(w http.ResponseWriter, r *http.Request) {
 
 			zr, err := zip.NewReader(file, r.ContentLength)
 			if err != nil {
-				log.Printf("%s:\nerror opening zip\n", err)
+				log.Printf(err.Error())
 				http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 				return
 			}
