@@ -18,6 +18,7 @@ func MultiPartZipHandler(w http.ResponseWriter, r *http.Request) {
 
 	for _, files := range r.MultipartForm.File {
 		for _, file := range files {
+			log.Printf("opening %s\n", file.Filename)
 			f, err := file.Open()
 			if err != nil {
 				log.Printf("%s: error opening formfile %s\n", err, file.Filename)
@@ -38,6 +39,7 @@ func MultiPartZipHandler(w http.ResponseWriter, r *http.Request) {
 					// TODO handle nested zip files
 					basename := filepath.Base(info.Name())
 					name := nameWithoutExt(basename)
+					log.Printf("found %s\n", basename)
 					fmt.Fprintf(w, "%s\n", name)
 				}
 			}
