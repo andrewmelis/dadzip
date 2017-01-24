@@ -25,6 +25,7 @@ func MultiPartZipHandler(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
+			defer f.Close()
 
 			zr, err := zip.NewReader(f, r.ContentLength)
 			if err != nil {
